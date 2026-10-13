@@ -57,43 +57,43 @@ const birthdayConfig = {
   gallery: [
     {
       src: "assets/images/photo-1.jpg",
-      caption: "Golden hour walks & quiet smiles",
-      date: "Sunset Memories"
+      caption: "",
+      date: ""
     },
     {
       src: "assets/images/photo-2.jpg",
-      caption: "Sparklers, laughter, and starry skies",
-      date: "Night of Magic"
+      caption: "",
+      date: ""
     },
     {
       src: "assets/images/photo-3.jpg",
-      caption: "Warm morning coffee & blooming flowers",
-      date: "Peaceful Mornings"
+      caption: "",
+      date: ""
     },
     {
       src: "assets/images/photo-4.jpg",
-      caption: "A celebration of your radiant glow",
-      date: "Birthday Joy"
+      caption: "",
+      date: ""
     },
     {
       src: "assets/images/photo-5.jpg",
-      caption: "By the ocean where time stood still",
-      date: "Coastal Bliss"
+      caption: "",
+      date: ""
     },
     {
       src: "assets/images/photo-6.jpg",
-      caption: "Endless laughter under fairy lights",
-      date: "Unforgettable"
+      caption: "",
+      date: ""
     },
     {
       src: "assets/images/photo-7.jpg",
-      caption: "Adventures yet to come & dreams to share",
-      date: "Future Horizons"
+      caption: "",
+      date: ""
     },
     {
       src: "assets/images/photo-8.jpg",
-      caption: "Every memory with you is a treasure",
-      date: "In My Heart"
+      caption: "",
+      date: ""
     }
   ],
 
@@ -183,18 +183,18 @@ const birthdayConfig = {
     gallery: [
       {
         src: "assets/images/motherhood-1.jpg",
-        caption: "A favorite memory with your little one",
-        date: "Purest Love"
+        caption: "",
+        date: ""
       },
       {
         src: "assets/images/motherhood-2.jpg",
-        caption: "Sweet everyday giggles & cuddles",
-        date: "Quiet Moments"
+        caption: "",
+        date: ""
       },
       {
         src: "assets/images/motherhood-3.jpg",
-        caption: "A special milestone in your journey",
-        date: "Treasured Chapter"
+        caption: "",
+        date: ""
       }
     ],
     babyWish: "May your home be filled with laughter, your heart with peace, and your days with little moments that remind you how beautiful this journey can be. May you and your little one grow together in love, strength, and happiness. And may you always remember to give yourself the same tenderness you give to everyone you love. ♡"
@@ -324,27 +324,21 @@ function handleImageError(imgEl, fallbackContainerId) {
     if (fallbackEl) {
       imgEl.style.display = "none";
       fallbackEl.style.display = "flex";
+      fallbackEl.innerHTML = "";
       return;
     }
   }
 
-  // Replace missing image with an attractive card
+  // Replace missing image with a clean blank card
   const parent = imgEl.parentElement;
   if (!parent) return;
 
   // Prevent duplicate placeholders
   if (parent.querySelector(".photo-fallback-card")) return;
 
-  const srcPath = imgEl.getAttribute("src") || "";
-  const filename = srcPath.split("/").pop() || "photo.jpg";
-
   const placeholder = document.createElement("div");
   placeholder.className = "photo-fallback-card";
-  placeholder.innerHTML = `
-    <span class="fallback-icon">📸</span>
-    <span class="fallback-title">Memory Slot</span>
-    <span class="fallback-text">Drop <code>${filename}</code> into <code>assets/images/</code></span>
-  `;
+  placeholder.innerHTML = "";
   imgEl.style.display = "none";
   parent.appendChild(placeholder);
 }
@@ -357,27 +351,23 @@ function hydrateGallery() {
   if (!galleryGrid) return;
   galleryGrid.innerHTML = "";
 
-  const stickers = ["💖", "✨", "🌸", "🦋", "🌷", "⭐", "💌", "🎂"];
-
   birthdayConfig.gallery.forEach((item, index) => {
     const card = document.createElement("div");
     card.className = "scrapbook-card";
     card.setAttribute("role", "button");
     card.setAttribute("tabindex", "0");
-    card.setAttribute("aria-label", `View photograph ${index + 1}: ${item.caption}`);
-
-    const sticker = stickers[index % stickers.length];
+    card.setAttribute("aria-label", `Memory photograph ${index + 1}`);
 
     card.innerHTML = `
       <div class="scrapbook-tape" aria-hidden="true"></div>
-      <div class="scrapbook-sticker" aria-hidden="true">${sticker}</div>
       <div class="scrapbook-img-frame">
-        <img src="${item.src}" alt="${item.caption}" loading="lazy">
+        <img src="${item.src}" alt="${item.caption || ''}" loading="lazy">
       </div>
+      ${item.caption ? `
       <div class="scrapbook-card-caption">
         <p class="scrapbook-caption-text">${item.caption}</p>
-        <span class="scrapbook-meta">${item.date || `Memory #${index + 1}`}</span>
-      </div>
+        ${item.date ? `<span class="scrapbook-meta">${item.date}</span>` : ""}
+      </div>` : ""}
     `;
 
     // Handle image error gracefully
@@ -1082,11 +1072,7 @@ function updateLightboxContent() {
       imgEl.style.display = "none";
       if (fallbackEl) {
         fallbackEl.style.display = "block";
-        const filename = item.src.split("/").pop() || "photo.jpg";
-        document.getElementById("lightbox-fallback-text").innerHTML = `
-          Memory Slot #${currentLightboxIndex + 1}<br>
-          <small>Add <code>${filename}</code> to <code>assets/images/</code> to display your photo here.</small>
-        `;
+        fallbackEl.innerHTML = "";
       }
     };
   }
@@ -1302,25 +1288,24 @@ function initMotherhoodSection() {
   const galleryGrid = document.getElementById("motherhood-gallery-grid");
   if (galleryGrid && mConfig.gallery) {
     galleryGrid.innerHTML = "";
-    const icons = ["🌸", "🍼", "💖"];
 
     mConfig.gallery.forEach((item, index) => {
       const card = document.createElement("div");
       card.className = "motherhood-card";
       card.setAttribute("role", "button");
       card.setAttribute("tabindex", "0");
-      card.setAttribute("aria-label", `Motherhood memory ${index + 1}: ${item.caption}`);
+      card.setAttribute("aria-label", `Motherhood memory ${index + 1}`);
 
       card.innerHTML = `
         <div class="scrapbook-tape motherhood-tape" aria-hidden="true"></div>
-        <div class="scrapbook-sticker" aria-hidden="true">${icons[index % icons.length]}</div>
         <div class="scrapbook-img-frame">
-          <img src="${item.src}" alt="${item.caption}" loading="lazy">
+          <img src="${item.src}" alt="${item.caption || ''}" loading="lazy">
         </div>
+        ${item.caption ? `
         <div class="scrapbook-card-caption">
           <p class="scrapbook-caption-text">${item.caption}</p>
-          <span class="scrapbook-meta">${item.date || `Moment #${index + 1}`}</span>
-        </div>
+          ${item.date ? `<span class="scrapbook-meta">${item.date}</span>` : ""}
+        </div>` : ""}
       `;
 
       const img = card.querySelector("img");
@@ -1342,11 +1327,7 @@ function initMotherhoodSection() {
             lightboxImg.style.display = "none";
             if (lightboxFallback) {
               lightboxFallback.style.display = "block";
-              const filename = item.src.split("/").pop() || "photo.jpg";
-              document.getElementById("lightbox-fallback-text").innerHTML = `
-                Motherhood Moment #${index + 1}<br>
-                <small>Add <code>${filename}</code> to <code>assets/images/</code> to display your photo here.</small>
-              `;
+              lightboxFallback.innerHTML = "";
             }
           };
         }
