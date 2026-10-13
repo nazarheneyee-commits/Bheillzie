@@ -31,14 +31,11 @@
   <aside id="surprise-curtain" class="curtain-overlay" aria-label="Welcome Surprise Screen">
     <div class="curtain-content">
 
-
-
-
       <div class="curtain-actions">
         <button id="btn-open-surprise" class="btn btn-glow" aria-label="Open Birthday Surprise Experience">
           <span class="btn-text">Open ♡</span>
-          <span class="btn-sparkle" aria-hidden="true">✨</span>
-        </button>
+          <span class="btn-sparkle" aria-hidden="true"></span>
+
       </div>
     </div>
     <div class="curtain-bg-glow" aria-hidden="true"></div>
@@ -359,38 +356,44 @@
             </div>
           </div>
 
-          <!-- Motherhood Letter Card (Revealed on click) -->
-          <article class="motherhood-letter-card" id="motherhood-letter-card" style="display: none;"
-            aria-label="Motherhood Letter">
-            <button id="btn-close-motherhood-letter" class="letter-close-btn" aria-label="Close motherhood letter"
-              title="Fold Back">✕</button>
-            <div class="letter-parchment motherhood-parchment">
-              <div class="letter-header">
-                <span class="letter-flourish">❦ 🌸 ❦</span>
-                <h3 class="letter-salutation font-script" id="motherhood-letter-salutation">Dear Bheilzzie,</h3>
+          <!-- Fullscreen Motherhood Letter Modal with Backdrop -->
+          <div id="motherhood-letter-modal" class="letter-modal" role="dialog" aria-modal="true"
+            aria-label="Motherhood Letter" style="display: none;">
+            <div class="letter-modal-backdrop" id="motherhood-modal-backdrop"></div>
+            <article class="letter-sheet" id="motherhood-letter-card" aria-label="Motherhood Letter">
+              <button id="btn-close-motherhood-letter" class="letter-close-btn" aria-label="Close motherhood letter"
+                title="Fold Back">✕</button>
+              <div class="letter-parchment motherhood-parchment">
+                <div class="letter-header">
+                  <span class="letter-flourish">❦ 🌸 ❦</span>
+                  <h3 class="letter-salutation font-script" id="motherhood-letter-salutation">Dear Bheilzzie,</h3>
+                </div>
+                <div class="letter-body" id="motherhood-letter-paragraphs">
+                  <p>Life has given you a beautiful new chapter, and now there's a little person who gets to know your
+                    love in a way no one else ever will.</p>
+                  <p>I hope you never forget that beyond being a mother, you are still the beautiful, wonderful, and
+                    extraordinary woman you have always been. You deserve to be celebrated, cared for, appreciated, and
+                    reminded of how special you are.</p>
+                  <p>Motherhood may bring new responsibilities, sleepless nights, unexpected challenges, and moments
+                    that
+                    change you forever. But I hope it also brings you countless reasons to smile, little moments of
+                    happiness, and a love that grows deeper with every passing day.</p>
+                  <p>As you celebrate another year of your life, I wish you happiness not only for the mother you are
+                    becoming, but also for the woman you are and all the dreams you still carry in your heart.</p>
+                  <p>May you always find time to care for yourself, chase your dreams, laugh freely, and remember that
+                    you
+                    deserve love and kindness, too.</p>
+                  <p>Happy Birthday, Bheilzzie. May this new chapter be filled with beautiful memories, a happy heart,
+                    and
+                    so much love for you and your little one.</p>
+                </div>
+                <div class="letter-signature">
+                  <p class="sign-off">With love, always.</p>
+                  <p class="signature-name font-script" id="motherhood-letter-signature">♡</p>
+                </div>
               </div>
-              <div class="letter-body" id="motherhood-letter-paragraphs">
-                <p>Life has given you a beautiful new chapter, and now there's a little person who gets to know your
-                  love in a way no one else ever will.</p>
-                <p>I hope you never forget that beyond being a mother, you are still the beautiful, wonderful, and
-                  extraordinary woman you have always been. You deserve to be celebrated, cared for, appreciated, and
-                  reminded of how special you are.</p>
-                <p>Motherhood may bring new responsibilities, sleepless nights, unexpected challenges, and moments that
-                  change you forever. But I hope it also brings you countless reasons to smile, little moments of
-                  happiness, and a love that grows deeper with every passing day.</p>
-                <p>As you celebrate another year of your life, I wish you happiness not only for the mother you are
-                  becoming, but also for the woman you are and all the dreams you still carry in your heart.</p>
-                <p>May you always find time to care for yourself, chase your dreams, laugh freely, and remember that you
-                  deserve love and kindness, too.</p>
-                <p>Happy Birthday, Bheilzzie. May this new chapter be filled with beautiful memories, a happy heart, and
-                  so much love for you and your little one.</p>
-              </div>
-              <div class="letter-signature">
-                <p class="sign-off">With love, always.</p>
-                <p class="signature-name font-script" id="motherhood-letter-signature">♡</p>
-              </div>
-            </div>
-          </article>
+            </article>
+          </div>
         </div>
 
         <!-- Motherhood Memory Gallery: "Little Moments, Big Love" -->
@@ -405,6 +408,18 @@
           </div>
         </div>
 
+        <!-- Gentle Blessing for Mother & Baby -->
+        <div class="motherhood-wish-section text-center">
+          <button id="btn-motherhood-wish" class="btn btn-glow-motherhood"
+            aria-label="A gentle blessing for you and your baby">
+            <span>A Gentle Blessing For You & Your Baby 🌸</span>
+          </button>
+          <div id="motherhood-wish-card" class="motherhood-wish-card" style="display: none;">
+            <div class="wish-card-flourish">✨ 🌸 ✨</div>
+            <blockquote id="motherhood-wish-quote" class="motherhood-wish-quote font-script"></blockquote>
+            <span class="motherhood-wish-badge">With Endless Love For You Both</span>
+          </div>
+        </div>
 
       </div>
     </section>
@@ -627,7 +642,7 @@
         <div class="finale-actions">
           <button id="btn-grand-surprise" class="btn btn-glow-grand"
             aria-label="Trigger grand birthday fireworks and finale message">
-            <span>One Last Surprise 💖</span>
+            <span>One Last Surprise </span>
           </button>
         </div>
 
@@ -661,7 +676,7 @@
         </p>
       </div>
       <div class="grand-modal-footer">
-        <button id="btn-finale-celebrate" class="btn btn-primary">Celebrate Once More! 🎆</button>
+        <button id="btn-finale-celebrate" class="btn btn-primary">Celebrate Once More! </button>
       </div>
     </div>
   </div>

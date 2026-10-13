@@ -1287,24 +1287,39 @@ function initMotherhoodSection() {
 
   // Interactive Motherhood Envelope
   const envBtn = document.getElementById("motherhood-envelope-btn");
-  const letterCard = document.getElementById("motherhood-letter-card");
+  const letterModal = document.getElementById("motherhood-letter-modal");
+  const modalBackdrop = document.getElementById("motherhood-modal-backdrop");
   const closeLetterBtn = document.getElementById("btn-close-motherhood-letter");
 
-  if (envBtn && letterCard) {
-    envBtn.addEventListener("click", () => {
+  if (envBtn) {
+    function openMotherhoodModal() {
       envBtn.classList.add("is-open");
-      letterCard.style.display = "block";
+      if (letterModal) {
+        letterModal.style.display = "flex";
+        document.body.style.overflow = "hidden";
+      }
       const rect = envBtn.getBoundingClientRect();
       triggerConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2, 40);
       showToast("🌸 For the mother in you ♡");
-    });
-
-    if (closeLetterBtn) {
-      closeLetterBtn.addEventListener("click", () => {
-        letterCard.style.display = "none";
-        envBtn.classList.remove("is-open");
-      });
     }
+
+    function closeMotherhoodModal() {
+      if (letterModal) {
+        letterModal.style.display = "none";
+        document.body.style.overflow = "";
+      }
+      envBtn.classList.remove("is-open");
+    }
+
+    envBtn.addEventListener("click", openMotherhoodModal);
+    if (closeLetterBtn) closeLetterBtn.addEventListener("click", closeMotherhoodModal);
+    if (modalBackdrop) modalBackdrop.addEventListener("click", closeMotherhoodModal);
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && letterModal && letterModal.style.display === "flex") {
+        closeMotherhoodModal();
+      }
+    });
   }
 
   // Hydrate Motherhood 3-Card Mini Gallery ("Little Moments, Big Love")
