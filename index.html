@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="A beautiful, interactive birthday surprise website celebrating a very special person with memories, love letters, music, and magical surprises.">
+  <meta name="keywords" content="birthday, celebration, love letter, interactive surprise, memories, photo gallery">
+  <meta name="theme-color" content="#1a0c24">
+
+  <title>Bheillzie ♡ Happy Birthday</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Ambient Particle Canvas for Floating Hearts & Sparkles -->
+  <canvas id="ambient-canvas" aria-hidden="true"></canvas>
+
+  <!-- ========================================================
+       1. OPENING SCREEN — THE BIRTHDAY SURPRISE OVERLAY
+       ======================================================== -->
+  <aside id="surprise-curtain" class="curtain-overlay" aria-label="Welcome Surprise Screen">
+    <div class="curtain-content">
+      <div class="curtain-badge">A Special Birthday Gift</div>
+      <div class="curtain-hearts-icon" aria-hidden="true">💖</div>
+      <h1 class="curtain-title">I Made Something Special for You...</h1>
+      <p class="curtain-recipient">For my dearest <span class="recipient-name-curtain font-script">Someone
+          Special</span></p>
+      <p class="curtain-subtext">Put on your earphones, take a deep breath, and tap below.</p>
+
+      <div class="curtain-actions">
+        <button id="btn-open-surprise" class="btn btn-glow" aria-label="Open Birthday Surprise Experience">
+          <span class="btn-text">Open Your Surprise ♡</span>
+          <span class="btn-sparkle" aria-hidden="true">✨</span>
+        </button>
+        <button id="btn-skip-intro" class="btn btn-text-link" aria-label="Skip introduction animation">
+          Skip directly to celebration →
+        </button>
+      </div>
+    </div>
+    <div class="curtain-bg-glow" aria-hidden="true"></div>
+  </aside>
+
+  <!-- ========================================================
+       PERSISTENT FLOATING MUSIC PLAYER
+       ======================================================== -->
+  <aside id="floating-music-player" class="music-player-widget" aria-label="Background Music Player">
+    <audio id="birthday-audio" preload="metadata" loop></audio>
+    <div class="player-card">
+      <button id="btn-play-pause" class="player-disc-btn" aria-label="Play or pause background music"
+        title="Toggle Music">
+        <span class="disc-vinyl" aria-hidden="true">
+          <span class="disc-inner-groove"></span>
+          <span class="disc-heart">♪</span>
+        </span>
+      </button>
+
+      <div class="player-info">
+        <div class="player-header">
+          <span class="player-song-title">Ken Cezar - 7352</span>
+          <span id="player-status-badge" class="player-badge">Paused</span>
+        </div>
+        <div class="player-visualizer" aria-hidden="true">
+          <span class="viz-bar"></span>
+          <span class="viz-bar"></span>
+          <span class="viz-bar"></span>
+          <span class="viz-bar"></span>
+          <span class="viz-bar"></span>
+        </div>
+      </div>
+
+      <div class="player-controls">
+        <button id="btn-mute" class="player-icon-btn" aria-label="Mute or unmute music" title="Mute/Unmute">
+          <span id="mute-icon">🔊</span>
+        </button>
+        <label for="volume-slider" class="sr-only">Volume Control</label>
+        <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.75" class="volume-slider"
+          title="Volume slider">
+      </div>
+    </div>
+  </aside>
+
+  <!-- ========================================================
+       MAIN NAVIGATION BAR
+       ======================================================== -->
+  <header class="site-header" id="site-header">
+    <div class="header-container">
+      <a href="#hero" class="brand-link" aria-label="Scroll to top">
+        <span class="brand-heart">♡</span>
+        <span class="brand-text">Happy Birthday, <span class="recipient-name-nav">You</span></span>
+      </a>
+      <nav class="nav-links" aria-label="Page Sections">
+        <a href="#hero" class="nav-link">Home</a>
+        <a href="#cake-section" class="nav-link">Cake & Wish</a>
+        <a href="#gallery-section" class="nav-link">Memories</a>
+        <a href="#motherhood-section" class="nav-link">Motherhood</a>
+        <a href="#letter-section" class="nav-link">Letter</a>
+        <a href="#surprises-section" class="nav-link">Surprises</a>
+        <a href="#timeline-section" class="nav-link">Timeline</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content Wrapper -->
+  <main id="main-content">
+
+    <!-- ========================================================
+         2. MAIN BIRTHDAY HERO SECTION
+         ======================================================== -->
+    <section id="hero" class="hero-section">
+      <div class="container hero-container">
+
+        <div class="hero-text-content">
+          <div class="hero-pill-badge animate-fade-in">
+            <span class="sparkle-icon">✨</span> Today Is All About You <span class="sparkle-icon">✨</span>
+          </div>
+
+          <h1 class="hero-greeting animate-fade-up">
+            Happy Birthday,<br>
+            <span class="recipient-name font-script hero-name-highlight">Special Someone</span>! 🎂
+          </h1>
+
+          <p id="hero-subtitle" class="hero-subtitle animate-fade-up">
+            Today is a celebration of the most wonderful person in the world.
+          </p>
+
+          <!-- Animated Typewriter birthday phrase -->
+          <div class="typing-box animate-fade-up">
+            <span class="typing-lead">A thought for you: </span>
+            <span id="typing-text" class="typing-text"></span>
+            <span class="typing-cursor" aria-hidden="true">|</span>
+          </div>
+
+          <div class="hero-cta-group animate-fade-up">
+            <a href="#cake-section" class="btn btn-primary" id="btn-hero-cake">
+              <span>Blow the Candles 🕯️</span>
+            </a>
+            <a href="#letter-section" class="btn btn-outline" id="btn-hero-letter">
+              <span>Read My Letter ✉️</span>
+            </a>
+            <button id="btn-surprise-hero" class="btn btn-secondary">
+              <span>A Little Surprise for You 🎁</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-image-wrapper animate-fade-in">
+          <div class="polaroid-frame hero-polaroid">
+            <div class="polaroid-pin" aria-hidden="true">📌</div>
+            <div class="polaroid-tape" aria-hidden="true"></div>
+            <div class="polaroid-img-container">
+              <img id="hero-photo" src="assets/images/bheillzie.jpg" alt="Birthday celebration portrait"
+                class="hero-photo" loading="eager">
+              <div class="photo-fallback-card hero-fallback" id="hero-photo-fallback" style="display: none;">
+                <span class="fallback-icon">📸</span>
+                <span class="fallback-title">Your Special Photo</span>
+                <span class="fallback-text">Place <code>bheillzie.jpg</code> in <code>assets/images/</code></span>
+              </div>
+            </div>
+            <div class="polaroid-caption">
+              <span class="caption-quote font-script" id="hero-photo-caption">The sweetest smile on your special day
+                ♡</span>
+              <span class="caption-date" id="hero-photo-date">Forever Cherished</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="scroll-down-indicator" aria-hidden="true">
+        <a href="#cake-section" class="scroll-arrow" aria-label="Scroll to next section">
+          <span>Explore Your Celebration</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         3. INTERACTIVE BIRTHDAY CAKE SECTION
+         ======================================================== -->
+    <section id="cake-section" class="cake-section section-padding">
+      <div class="container text-center">
+        <div class="section-badge">Make A Wish</div>
+        <h2 class="section-title">Blow Out the Birthday Candles 🎂</h2>
+        <p class="section-subtitle">Close your eyes, make a heartfelt wish, and tap the button to blow out the candles!
+        </p>
+
+        <div class="cake-stage">
+          <!-- 3D Interactive Animated Cake -->
+          <div class="cake-container" id="cake-wrapper">
+            <!-- Plate -->
+            <div class="cake-plate"></div>
+
+            <!-- Tier 1 (Bottom) -->
+            <div class="cake-tier cake-tier-bottom">
+              <div class="frosting-drip drip-1"></div>
+              <div class="frosting-drip drip-2"></div>
+              <div class="frosting-drip drip-3"></div>
+              <div class="cake-pearls"></div>
+            </div>
+
+            <!-- Tier 2 (Middle) -->
+            <div class="cake-tier cake-tier-middle">
+              <div class="frosting-swirl swirl-1"></div>
+              <div class="frosting-swirl swirl-2"></div>
+              <div class="cake-strawberries">
+                <span class="berry berry-1">🍓</span>
+                <span class="berry berry-2">🍓</span>
+                <span class="berry berry-3">🍓</span>
+              </div>
+            </div>
+
+            <!-- Tier 3 (Top) -->
+            <div class="cake-tier cake-tier-top">
+              <div class="top-cream"></div>
+            </div>
+
+            <!-- Candles Cluster -->
+            <div class="candles-container" id="candles-container">
+              <!-- Candle 1 -->
+              <div class="candle candle-1">
+                <div class="flame" id="flame-1">
+                  <div class="flame-glow"></div>
+                </div>
+                <div class="wick"></div>
+                <div class="candle-stick candle-stick-pink"></div>
+                <div class="smoke" id="smoke-1"></div>
+              </div>
+
+              <!-- Candle 2 (Center) -->
+              <div class="candle candle-2">
+                <div class="flame" id="flame-2">
+                  <div class="flame-glow"></div>
+                </div>
+                <div class="wick"></div>
+                <div class="candle-stick candle-stick-gold"></div>
+                <div class="smoke" id="smoke-2"></div>
+              </div>
+
+              <!-- Candle 3 -->
+              <div class="candle candle-3">
+                <div class="flame" id="flame-3">
+                  <div class="flame-glow"></div>
+                </div>
+                <div class="wick"></div>
+                <div class="candle-stick candle-stick-pink"></div>
+                <div class="smoke" id="smoke-3"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Status Banner -->
+          <div id="cake-status-card" class="cake-status-card">
+            <span class="status-icon" id="cake-status-icon">🕯️</span>
+            <span class="status-msg" id="cake-status-msg">The candles are burning bright. What will you wish for?</span>
+          </div>
+
+          <!-- Interactive Action Buttons -->
+          <div class="cake-actions">
+            <button id="btn-blow-candles" class="btn btn-blow" aria-label="Blow out birthday candles">
+              <span class="btn-icon">💨</span>
+              <span class="btn-text">Blow Out The Candles!</span>
+            </button>
+            <button id="btn-relight-candles" class="btn btn-secondary" style="display: none;"
+              aria-label="Relight birthday candles">
+              <span class="btn-icon">✨</span>
+              <span class="btn-text">Relight The Candles</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         4. PHOTO GALLERY — OUR MEMORIES (SCRAPBOOK & LIGHTBOX)
+         ======================================================== -->
+    <section id="gallery-section" class="gallery-section section-padding">
+      <div class="container">
+        <div class="text-center">
+          <div class="section-badge">Treasured Moments</div>
+          <h2 class="section-title">Our Memories Scrapbook 📸</h2>
+          <p class="section-subtitle">Every photograph holds a heartbeat of laughter, warmth, and stories we share.</p>
+        </div>
+
+        <!-- Scrapbook Grid Container (Populated dynamically from config) -->
+        <div class="scrapbook-grid" id="scrapbook-gallery">
+          <!-- Dynamically generated gallery cards will be inserted here -->
+        </div>
+
+        <div class="gallery-footer-note text-center">
+          <p class="scrapbook-hint">💡 Click any photograph to view in full resolution or walk through memory lane.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lightbox Modal for Photo Gallery -->
+    <div id="lightbox-modal" class="lightbox-modal" role="dialog" aria-modal="true" aria-label="Photo Lightbox"
+      style="display: none;">
+      <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+      <div class="lightbox-content">
+        <button id="lightbox-close" class="lightbox-btn lightbox-close" aria-label="Close Lightbox">✕</button>
+        <button id="lightbox-prev" class="lightbox-btn lightbox-prev" aria-label="Previous photograph">❮</button>
+        <button id="lightbox-next" class="lightbox-btn lightbox-next" aria-label="Next photograph">❯</button>
+
+        <div class="lightbox-image-wrapper">
+          <img id="lightbox-image" src="" alt="Enlarged gallery memory" class="lightbox-image">
+          <div id="lightbox-fallback" class="lightbox-fallback" style="display: none;">
+            <span class="fallback-icon">📸</span>
+            <p id="lightbox-fallback-text">Photo placeholder</p>
+          </div>
+        </div>
+
+        <div class="lightbox-footer">
+          <p id="lightbox-caption" class="lightbox-caption font-script"></p>
+          <span id="lightbox-counter" class="lightbox-counter">1 / 8</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         4B. A TRIBUTE TO BHEILZZIE — HER JOURNEY INTO MOTHERHOOD
+         ======================================================== -->
+    <section id="motherhood-section" class="motherhood-section section-padding">
+      <div class="container text-center">
+        <div class="section-badge motherhood-badge">A Beautiful New Chapter 🌸</div>
+        <h2 class="section-title motherhood-title font-serif">And Now, You're Someone's Whole World...</h2>
+        <p class="section-subtitle motherhood-subtitle">
+          To the beautiful woman you've always been, and the wonderful mother you're becoming.
+        </p>
+
+        <!-- Featured Mother & Baby Portrait Area -->
+        <div class="motherhood-featured-stage">
+          <div class="polaroid-frame motherhood-hero-frame">
+            <div class="motherhood-flower-pin" aria-hidden="true">🌸</div>
+            <div class="polaroid-tape motherhood-tape" aria-hidden="true"></div>
+            <div class="polaroid-img-container motherhood-img-container">
+              <img id="motherhood-hero-img" src="assets/images/motherhood-hero.jpg" alt="Bheilzzie and her baby" class="motherhood-hero-photo" loading="lazy">
+              <div class="photo-fallback-card motherhood-hero-fallback" id="motherhood-hero-fallback" style="display: none;">
+                <span class="fallback-icon">🤱</span>
+                <span class="fallback-title">Mother & Baby Portrait</span>
+                <span class="fallback-text">Drop your photo as <code>motherhood-hero.jpg</code> into <code>assets/images/</code></span>
+              </div>
+            </div>
+            <div class="polaroid-caption">
+              <span class="caption-quote font-script" id="motherhood-hero-caption">Holding your whole world in your arms ♡</span>
+              <span class="caption-date">A Love Beyond Measure</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Feature: A Letter For The Mother In You -->
+        <div class="motherhood-letter-showcase">
+          <div class="motherhood-envelope-trigger" id="motherhood-envelope-btn" role="button" tabindex="0" aria-label="Open letter for the mother in you">
+            <div class="m-envelope-visual">
+              <div class="m-envelope-flap" id="m-envelope-flap"></div>
+              <div class="m-envelope-body">
+                <span class="m-envelope-seal">🌸</span>
+                <span class="m-envelope-tag font-script">For the mother in you ♡</span>
+                <span class="m-envelope-hint">Click to read your letter</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Motherhood Letter Card (Revealed on click) -->
+          <article class="motherhood-letter-card" id="motherhood-letter-card" style="display: none;" aria-label="Motherhood Letter">
+            <button id="btn-close-motherhood-letter" class="letter-close-btn" aria-label="Close motherhood letter" title="Fold Back">✕</button>
+            <div class="letter-parchment motherhood-parchment">
+              <div class="letter-header">
+                <span class="letter-flourish">❦ 🌸 ❦</span>
+                <h3 class="letter-salutation font-script" id="motherhood-letter-salutation">Dear Bheilzzie,</h3>
+              </div>
+              <div class="letter-body" id="motherhood-letter-paragraphs">
+                <p>Life has given you a beautiful new chapter, and now there's a little person who gets to know your love in a way no one else ever will.</p>
+                <p>I hope you never forget that beyond being a mother, you are still the beautiful, wonderful, and extraordinary woman you have always been. You deserve to be celebrated, cared for, appreciated, and reminded of how special you are.</p>
+                <p>Motherhood may bring new responsibilities, sleepless nights, unexpected challenges, and moments that change you forever. But I hope it also brings you countless reasons to smile, little moments of happiness, and a love that grows deeper with every passing day.</p>
+                <p>As you celebrate another year of your life, I wish you happiness not only for the mother you are becoming, but also for the woman you are and all the dreams you still carry in your heart.</p>
+                <p>May you always find time to care for yourself, chase your dreams, laugh freely, and remember that you deserve love and kindness, too.</p>
+                <p>Happy Birthday, Bheilzzie. May this new chapter be filled with beautiful memories, a happy heart, and so much love for you and your little one.</p>
+              </div>
+              <div class="letter-signature">
+                <p class="sign-off">With love, always.</p>
+                <p class="signature-name font-script" id="motherhood-letter-signature">♡</p>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Motherhood Memory Gallery: "Little Moments, Big Love" -->
+        <div class="motherhood-gallery-container">
+          <div class="subheader-wrap">
+            <h3 class="sub-section-title font-serif">Little Moments, Big Love 🍼</h3>
+            <p class="sub-section-desc">Snapshots of quiet mornings, gentle lullabies, and unconditional warmth.</p>
+          </div>
+
+          <div class="motherhood-gallery-grid" id="motherhood-gallery-grid">
+            <!-- 3 Motherhood Photo Cards rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- Gentle Interactive Wish Button -->
+        <div class="motherhood-wish-section">
+          <button id="btn-motherhood-wish" class="btn btn-glow-motherhood" aria-label="A little wish for you and your baby">
+            <span class="btn-icon">✨</span>
+            <span class="btn-text">A little wish for you and your baby ✨</span>
+          </button>
+
+          <!-- Revealed Wish Card -->
+          <div id="motherhood-wish-card" class="motherhood-wish-card" style="display: none;">
+            <div class="wish-card-flourish">🕊️ 💖 🌿</div>
+            <blockquote class="motherhood-wish-quote font-editorial" id="motherhood-wish-quote">
+              “May your home be filled with laughter, your heart with peace, and your days with little moments that remind you how beautiful this journey can be. May you and your little one grow together in love, strength, and happiness. And may you always remember to give yourself the same tenderness you give to everyone you love. ♡”
+            </blockquote>
+            <span class="motherhood-wish-badge">A Heartfelt Blessing For You & Your Baby</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================
+         5. HEARTFELT BIRTHDAY LETTER (WAX-SEALED INTERACTIVE ENVELOPE)
+         ======================================================== -->
+    <section id="letter-section" class="letter-section section-padding">
+      <div class="container text-center">
+        <div class="section-badge">Straight From My Heart</div>
+        <h2 class="section-title">A Letter Written Just For You </h2>
+        <p class="section-subtitle">Click on the red wax seal to break the seal and read your personal letter.</p>
+
+        <!-- Interactive Envelope Container -->
+        <div class="envelope-showcase">
+          <div class="envelope-wrapper" id="envelope-wrapper">
+            <div class="envelope-base">
+              <!-- Envelope Flap (Triangular 3D flap) -->
+              <div class="envelope-flap" id="envelope-flap"></div>
+
+              <!-- Pocket front folds -->
+              <div class="envelope-pocket-left"></div>
+              <div class="envelope-pocket-right"></div>
+              <div class="envelope-pocket-bottom"></div>
+
+              <!-- Wax Seal -->
+              <button id="wax-seal" class="wax-seal-btn" aria-label="Break wax seal and open envelope">
+                <span class="wax-seal-ring"></span>
+                <span class="wax-seal-heart font-script">♡</span>
+              </button>
+
+              <!-- Stamp decoration -->
+              <div class="envelope-stamp" aria-hidden="true">
+                <span>Special Delivery</span>
+                <span>🌹</span>
+              </div>
+
+              <!-- Envelope Address Note -->
+              <div class="envelope-address">
+                <span class="address-to font-script">To: <span class="recipient-name-letter">My Favorite
+                    Person</span></span>
+                <span class="address-from font-script">With endless love ♡</span>
+              </div>
+            </div>
+
+            <!-- Letter Sheet (Pops out and expands) -->
+            <article class="letter-sheet" id="letter-sheet" aria-label="Birthday Letter Content">
+              <button id="btn-close-letter" class="letter-close-btn" aria-label="Close letter and fold back"
+                title="Fold Letter Back">✕</button>
+
+              <div class="letter-parchment">
+                <div class="letter-header">
+                  <span class="letter-flourish">❦</span>
+                  <h3 class="letter-salutation font-script" id="letter-greeting">My Dearest [NAME],</h3>
+                </div>
+
+                <div class="letter-body" id="letter-body-paragraphs">
+                  <!-- Filled dynamically from birthdayConfig -->
+
+                </div>
+
+                <div class="letter-signature">
+                  <p class="sign-off">With all my love,</p>
+                  <p class="signature-name font-script" id="letter-sender-name">[YOUR NAME] ♡</p>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Accessible / Direct Button to Open Letter -->
+          <div class="letter-direct-actions">
+            <button id="btn-read-letter-direct" class="btn btn-secondary">
+              <span class="btn-icon">📜</span>
+              <span>Read My Letter Directly</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         6. INTERACTIVE BIRTHDAY SURPRISES
+         ======================================================== -->
+    <section id="surprises-section" class="surprises-section section-padding">
+      <div class="container">
+        <div class="text-center">
+          <div class="section-badge">Interactive Wonders</div>
+          <h2 class="section-title">Little Boxes of Joy & Love </h2>
+          <p class="section-subtitle">Unwrap secret notes, magical wishes, and interactive delights.</p>
+        </div>
+
+        <!-- Part A: Surprise Gift Box -->
+        <div class="gift-box-stage text-center">
+          <div class="gift-box-wrapper" id="gift-box-wrapper">
+            <div class="gift-box-interactive" id="gift-box" role="button" tabindex="0"
+              aria-label="Tap to open surprise gift box">
+              <!-- Lid with Bow -->
+              <div class="gift-lid" id="gift-lid">
+                <div class="gift-ribbon-v"></div>
+                <div class="gift-ribbon-h"></div>
+                <div class="gift-bow">
+                  <span class="bow-loop left"></span>
+                  <span class="bow-knot">🎀</span>
+                  <span class="bow-loop right"></span>
+                </div>
+              </div>
+
+              <!-- Box Body -->
+              <div class="gift-body">
+                <div class="gift-ribbon-v"></div>
+                <div class="gift-ribbon-h"></div>
+                <div class="gift-tag">Tap to Open ♡</div>
+              </div>
+            </div>
+
+            <!-- Card that blooms out of gift box -->
+            <div class="gift-reward-card" id="gift-reward-card" style="display: none;">
+              <div class="reward-sparkle">✨ Surprise! ✨</div>
+              <h3 class="reward-title font-script" id="gift-reward-title">A Birthday Golden Ticket</h3>
+              <p class="reward-desc" id="gift-reward-desc">This ticket entitles you to: Unlimited hugs, a warm dinner
+                date of your choice, and all my love for eternity!</p>
+              <div class="reward-coupon-code">COUPON: BIRTHDAY-LOVE-FOREVER</div>
+              <button id="btn-close-gift" class="btn btn-sm btn-outline">Close Gift Box</button>
+            </div>
+          </div>
+          <p class="gift-hint-text">✨ Tap the gift box above to untie the ribbon and see what's inside!</p>
+        </div>
+
+        <!-- Part B: Click-to-Reveal 6 Secret Heart Cards -->
+        <div class="secret-cards-container">
+          <div class="text-center subheader-wrap">
+            <h3 class="sub-section-title">Reasons Why You Are So Special ♡</h3>
+            <p class="sub-section-desc">Tap on any heart card to flip and discover a sweet reminder.</p>
+          </div>
+
+          <div class="secret-cards-grid" id="secret-cards-grid">
+            <!-- 6 Cards generated from config -->
+          </div>
+        </div>
+
+        <!-- Part C: Magic Birthday Wish Generator -->
+        <div class="magic-wish-dispenser text-center">
+          <div class="wish-card-dispenser">
+            <div class="magic-wand-icon">🪄</div>
+            <h3 class="sub-section-title">Send a Little Birthday Magic ✨</h3>
+            <p class="magic-intro">Need an extra dose of love or a sweet blessing? Click below to summon birthday magic!
+            </p>
+
+            <button id="btn-magic-wish" class="btn btn-magic"
+              aria-label="Trigger confetti and reveal random birthday wish">
+              <span>Send a Little Birthday Magic ✨</span>
+            </button>
+
+            <!-- Dynamic Wish Display Box -->
+            <div id="dynamic-wish-box" class="dynamic-wish-box" style="display: none;">
+              <div class="wish-sparkle-stars">🌟 💖 🌟</div>
+              <blockquote id="dynamic-wish-quote" class="dynamic-wish-quote font-script">
+                "May your year ahead be as vibrant, warm, and incredible as your heart."
+              </blockquote>
+              <span class="wish-number" id="wish-counter-badge">Wish #1</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================
+         7. SPECIAL MEMORIES TIMELINE
+         ======================================================== -->
+    <section id="timeline-section" class="timeline-section section-padding">
+      <div class="container">
+        <div class="text-center">
+          <div class="section-badge">Our Journey</div>
+          <h2 class="section-title">Our Story & Milestones ⏳</h2>
+          <p class="section-subtitle">Every memory is a stepping stone of smiles, adventures, and milestones together.
+          </p>
+        </div>
+
+        <!-- Vertical Timeline Tree -->
+        <div class="timeline-tree" id="timeline-tree">
+          <div class="timeline-spine" aria-hidden="true"></div>
+          <!-- Populated dynamically from birthdayConfig -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         8. FINAL BIRTHDAY MESSAGE & GRAND FINALE
+         ======================================================== -->
+    <section id="finale-section" class="finale-section section-padding">
+      <div class="finale-starfield" aria-hidden="true"></div>
+
+      <div class="container text-center finale-container">
+        <div class="finale-badge">A Heartfelt Ending</div>
+
+        <h2 class="finale-heading font-script">
+          May All Your Wishes Come True... ✨
+        </h2>
+
+        <div class="finale-polaroid-wrap">
+          <div class="polaroid-frame finale-polaroid">
+            <img id="finale-photo" src="assets/images/bheillzie.jpg" alt="Final celebration photo of Bheillzie"
+              class="finale-photo" loading="lazy">
+            <div class="polaroid-caption">
+              <span class="caption-quote font-script">Here's to another year of magic with you ♡</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="finale-message-text" id="finale-message-text">
+          Thank you for bringing so much color into this world. I am endlessly grateful to celebrate this day with you.
+          May your path ahead be filled with laughter, great adventures, and all the dreams your heart can hold.
+        </p>
+
+        <!-- Grand Finale Surprise Trigger -->
+        <div class="finale-actions">
+          <button id="btn-grand-surprise" class="btn btn-glow-grand"
+            aria-label="Trigger grand birthday fireworks and finale message">
+            <span>One Last Surprise 💖</span>
+          </button>
+        </div>
+
+        <div class="return-top-wrap">
+          <button id="btn-back-to-top" class="btn btn-text-link" aria-label="Return to beginning of surprise website">
+            ⬆ Return to Beginning
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================
+       GRAND FINALE MODAL POPUP
+       ======================================================== -->
+  <div id="grand-finale-modal" class="grand-modal" role="dialog" aria-modal="true" aria-label="Final Birthday Blessing"
+    style="display: none;">
+    <div class="grand-modal-backdrop" id="grand-modal-backdrop"></div>
+    <div class="grand-modal-card">
+      <button id="grand-modal-close" class="modal-close-btn" aria-label="Close message">✕</button>
+
+      <h3 class="grand-modal-title font-script">A Wish For Your New Year</h3>
+      <div class="grand-modal-body">
+        <p class="grand-highlight-quote">
+          “May all your beautiful wishes find their way to you. Happy Birthday! ♡”
+        </p>
+        <p class="grand-closing-note">
+          Always remember how deeply you are loved, how bright your light shines, and that the best chapters of your
+          story are yet to come.
+        </p>
+      </div>
+      <div class="grand-modal-footer">
+        <button id="btn-finale-celebrate" class="btn btn-primary">Celebrate Once More! 🎆</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Accessible Toast / Notification Container -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+
+
+  <script src="script.js"></script>
+</body>
+
+</html>
