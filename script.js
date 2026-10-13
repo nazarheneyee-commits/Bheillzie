@@ -44,10 +44,7 @@ const birthdayConfig = {
   birthdayLetter: {
     salutation: "My Dearest Bheillzie,",
     paragraphs: [
-      "Happy birthday to someone who makes life infinitely more beautiful. Today is a celebration of you—your gentle heart, your contagious laugh, your dreams, and all the quiet wonders that make you uniquely special.",
-      "Looking back at all the laughter we've shared, the stories we've told, and the memories we've woven together, I find myself overwhelmed with gratitude. Having you in my life feels like finding sunshine on a rainy afternoon.",
-      "I hope this new chapter brings you peace of mind, adventures that fill your spirit with wonder, dreams turned into reality, and all the genuine happiness this universe has to offer.",
-      "Happy Birthday, Bheillzie. You deserve a day as breathtaking as your soul, and an even more magnificent year ahead."
+      // Add your personal message paragraphs here when ready!
     ],
     closing: "With all my love and warmest blessings,",
     signature: "Always Yours ♡"
@@ -1087,24 +1084,50 @@ function updateLightboxContent() {
 function initLetterEnvelope() {
   const envelope = document.getElementById("envelope-wrapper");
   const waxSeal = document.getElementById("wax-seal");
+  const letterModal = document.getElementById("letter-modal");
+  const modalBackdrop = document.getElementById("letter-modal-backdrop");
   const closeLetterBtn = document.getElementById("btn-close-letter");
   const directBtn = document.getElementById("btn-read-letter-direct");
 
   if (!envelope) return;
 
+  function showModal() {
+    if (letterModal) {
+      letterModal.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    }
+  }
+
+  function hideModal() {
+    if (letterModal) {
+      letterModal.style.display = "none";
+      document.body.style.overflow = "";
+    }
+    envelope.classList.remove("is-open");
+  }
+
   function openEnvelope() {
     envelope.classList.add("is-open");
     const rect = waxSeal ? waxSeal.getBoundingClientRect() : envelope.getBoundingClientRect();
     triggerConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2, 35);
+    setTimeout(showModal, 350);
   }
 
-  function closeEnvelope() {
-    envelope.classList.remove("is-open");
+  function openDirect() {
+    envelope.classList.add("is-open");
+    showModal();
   }
 
   if (waxSeal) waxSeal.addEventListener("click", openEnvelope);
-  if (closeLetterBtn) closeLetterBtn.addEventListener("click", closeEnvelope);
-  if (directBtn) directBtn.addEventListener("click", openEnvelope);
+  if (directBtn) directBtn.addEventListener("click", openDirect);
+  if (closeLetterBtn) closeLetterBtn.addEventListener("click", hideModal);
+  if (modalBackdrop) modalBackdrop.addEventListener("click", hideModal);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && letterModal && letterModal.style.display === "flex") {
+      hideModal();
+    }
+  });
 }
 
 /* ============================================================================
