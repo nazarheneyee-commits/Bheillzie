@@ -160,11 +160,7 @@
             <div class="polaroid-img-container">
               <img id="hero-photo" src="assets/images/bheillzie.jpg" alt="Birthday celebration portrait"
                 class="hero-photo" loading="eager">
-              <div class="photo-fallback-card hero-fallback" id="hero-photo-fallback" style="display: none;">
-                <span class="fallback-icon">📸</span>
-                <span class="fallback-title">Your Special Photo</span>
-                <span class="fallback-text">Place <code>bheillzie.jpg</code> in <code>assets/images/</code></span>
-              </div>
+              <div class="photo-fallback-card hero-fallback" id="hero-photo-fallback" style="display: none;"></div>
             </div>
             <div class="polaroid-caption">
               <span class="caption-quote font-script" id="hero-photo-caption">The sweetest smile on your special day
@@ -315,10 +311,7 @@
 
         <div class="lightbox-image-wrapper">
           <img id="lightbox-image" src="" alt="Enlarged gallery memory" class="lightbox-image">
-          <div id="lightbox-fallback" class="lightbox-fallback" style="display: none;">
-            <span class="fallback-icon">📸</span>
-            <p id="lightbox-fallback-text">Photo placeholder</p>
-          </div>
+          <div id="lightbox-fallback" class="lightbox-fallback" style="display: none;"></div>
         </div>
 
         <div class="lightbox-footer">
@@ -345,15 +338,14 @@
             <div class="motherhood-flower-pin" aria-hidden="true">🌸</div>
             <div class="polaroid-tape motherhood-tape" aria-hidden="true"></div>
             <div class="polaroid-img-container motherhood-img-container">
-              <img id="motherhood-hero-img" src="assets/images/motherhood-hero.jpg" alt="Bheilzzie and her baby" class="motherhood-hero-photo" loading="lazy">
-              <div class="photo-fallback-card motherhood-hero-fallback" id="motherhood-hero-fallback" style="display: none;">
-                <span class="fallback-icon">🤱</span>
-                <span class="fallback-title">Mother & Baby Portrait</span>
-                <span class="fallback-text">Drop your photo as <code>motherhood-hero.jpg</code> into <code>assets/images/</code></span>
-              </div>
+              <img id="motherhood-hero-img" src="assets/images/motherhood-hero.jpg" alt="Bheilzzie and her baby"
+                class="motherhood-hero-photo" loading="lazy">
+              <div class="photo-fallback-card motherhood-hero-fallback" id="motherhood-hero-fallback"
+                style="display: none;"></div>
             </div>
             <div class="polaroid-caption">
-              <span class="caption-quote font-script" id="motherhood-hero-caption">Holding your whole world in your arms ♡</span>
+              <span class="caption-quote font-script" id="motherhood-hero-caption">Holding your whole world in your arms
+                ♡</span>
               <span class="caption-date">A Love Beyond Measure</span>
             </div>
           </div>
@@ -361,7 +353,8 @@
 
         <!-- Interactive Feature: A Letter For The Mother In You -->
         <div class="motherhood-letter-showcase">
-          <div class="motherhood-envelope-trigger" id="motherhood-envelope-btn" role="button" tabindex="0" aria-label="Open letter for the mother in you">
+          <div class="motherhood-envelope-trigger" id="motherhood-envelope-btn" role="button" tabindex="0"
+            aria-label="Open letter for the mother in you">
             <div class="m-envelope-visual">
               <div class="m-envelope-flap" id="m-envelope-flap"></div>
               <div class="m-envelope-body">
@@ -373,20 +366,30 @@
           </div>
 
           <!-- Motherhood Letter Card (Revealed on click) -->
-          <article class="motherhood-letter-card" id="motherhood-letter-card" style="display: none;" aria-label="Motherhood Letter">
-            <button id="btn-close-motherhood-letter" class="letter-close-btn" aria-label="Close motherhood letter" title="Fold Back">✕</button>
+          <article class="motherhood-letter-card" id="motherhood-letter-card" style="display: none;"
+            aria-label="Motherhood Letter">
+            <button id="btn-close-motherhood-letter" class="letter-close-btn" aria-label="Close motherhood letter"
+              title="Fold Back">✕</button>
             <div class="letter-parchment motherhood-parchment">
               <div class="letter-header">
                 <span class="letter-flourish">❦ 🌸 ❦</span>
                 <h3 class="letter-salutation font-script" id="motherhood-letter-salutation">Dear Bheilzzie,</h3>
               </div>
               <div class="letter-body" id="motherhood-letter-paragraphs">
-                <p>Life has given you a beautiful new chapter, and now there's a little person who gets to know your love in a way no one else ever will.</p>
-                <p>I hope you never forget that beyond being a mother, you are still the beautiful, wonderful, and extraordinary woman you have always been. You deserve to be celebrated, cared for, appreciated, and reminded of how special you are.</p>
-                <p>Motherhood may bring new responsibilities, sleepless nights, unexpected challenges, and moments that change you forever. But I hope it also brings you countless reasons to smile, little moments of happiness, and a love that grows deeper with every passing day.</p>
-                <p>As you celebrate another year of your life, I wish you happiness not only for the mother you are becoming, but also for the woman you are and all the dreams you still carry in your heart.</p>
-                <p>May you always find time to care for yourself, chase your dreams, laugh freely, and remember that you deserve love and kindness, too.</p>
-                <p>Happy Birthday, Bheilzzie. May this new chapter be filled with beautiful memories, a happy heart, and so much love for you and your little one.</p>
+                <p>Life has given you a beautiful new chapter, and now there's a little person who gets to know your
+                  love in a way no one else ever will.</p>
+                <p>I hope you never forget that beyond being a mother, you are still the beautiful, wonderful, and
+                  extraordinary woman you have always been. You deserve to be celebrated, cared for, appreciated, and
+                  reminded of how special you are.</p>
+                <p>Motherhood may bring new responsibilities, sleepless nights, unexpected challenges, and moments that
+                  change you forever. But I hope it also brings you countless reasons to smile, little moments of
+                  happiness, and a love that grows deeper with every passing day.</p>
+                <p>As you celebrate another year of your life, I wish you happiness not only for the mother you are
+                  becoming, but also for the woman you are and all the dreams you still carry in your heart.</p>
+                <p>May you always find time to care for yourself, chase your dreams, laugh freely, and remember that you
+                  deserve love and kindness, too.</p>
+                <p>Happy Birthday, Bheilzzie. May this new chapter be filled with beautiful memories, a happy heart, and
+                  so much love for you and your little one.</p>
               </div>
               <div class="letter-signature">
                 <p class="sign-off">With love, always.</p>
@@ -408,22 +411,6 @@
           </div>
         </div>
 
-        <!-- Gentle Interactive Wish Button -->
-        <div class="motherhood-wish-section">
-          <button id="btn-motherhood-wish" class="btn btn-glow-motherhood" aria-label="A little wish for you and your baby">
-            <span class="btn-icon">✨</span>
-            <span class="btn-text">A little wish for you and your baby ✨</span>
-          </button>
-
-          <!-- Revealed Wish Card -->
-          <div id="motherhood-wish-card" class="motherhood-wish-card" style="display: none;">
-            <div class="wish-card-flourish">🕊️ 💖 🌿</div>
-            <blockquote class="motherhood-wish-quote font-editorial" id="motherhood-wish-quote">
-              “May your home be filled with laughter, your heart with peace, and your days with little moments that remind you how beautiful this journey can be. May you and your little one grow together in love, strength, and happiness. And may you always remember to give yourself the same tenderness you give to everyone you love. ♡”
-            </blockquote>
-            <span class="motherhood-wish-badge">A Heartfelt Blessing For You & Your Baby</span>
-          </div>
-        </div>
 
       </div>
     </section>

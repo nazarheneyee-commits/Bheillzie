@@ -72,8 +72,12 @@ bheillzie/
     ├── images/                   # Photographs folder
     │   ├── bheillzie.jpg         # Authentic portrait of Bheillzie (Hero & Finale photo)
     │   ├── hero-photo.jpg        # Linked to bheillzie.jpg
-    │   ├── photo-1.jpg           # Drop your custom memory photos here
-    │   ├── photo-2.jpg           # Drop your custom memory photos here
+    │   ├── motherhood-hero.jpg   # (Optional) Mother & baby featured portrait
+    │   ├── motherhood-1.jpg      # (Optional) Motherhood memory slot 1
+    │   ├── motherhood-2.jpg      # (Optional) Motherhood memory slot 2
+    │   ├── motherhood-3.jpg      # (Optional) Motherhood memory slot 3
+    │   ├── photo-1.jpg           # (Optional) Drop your custom memory photos here
+    │   ├── photo-2.jpg           # (Optional) Drop your custom memory photos here
     │   └── ...                   # Up to photo-8.jpg for scrapbook slots
     └── audio/                    # Audio folder
         ├── Ken Cezar - 7352 (Official Lyric Video).mp3
